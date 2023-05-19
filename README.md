@@ -3,7 +3,7 @@ Clinical Text Classification Using NLP technique Name Entity Recognition
 
 Natural language processing (NLP) can be used to answer a variety of questions about unstructured text, as well as facilitating open-ended exploration. It can be applied to datasets such as emails, online articles and comments, tweets and novels. Although the source is text, transformations are applied to convert this data to vectors, dictionaries and symbols which can be handled very effectively by q. Many operations such as searching, clustering, and keyword extraction can all be done using very simple data structures, such as feature vectors.
 
-# Dependancies
+## Dependancies
 import pandas as pd
 import spacy
 from spacy.tokens import DocBin
@@ -14,6 +14,7 @@ import pickle
 
 #Dataset had taken from kaggle https://www.kaggle.com/datasets/ner-dataset
 DATA
+
 {'examples': [{'id': '18c2f619-f102-452f-ab81-d26f7e283ffe',
    'content': "While bismuth compounds (Pepto-Bismol) decreased the number of bowel movements in those with travelers' diarrhea, they do not decrease the length of illness.[91] Anti-motility agents like loperamide are also effective at reducing the number of stools but not the duration of disease.[8] These agents should be used only if bloody diarrhea is not present.[92]\n\nDiosmectite, a natural aluminomagnesium silicate clay, is effective in alleviating symptoms of acute diarrhea in children,[93] and also has some effects in chronic functional diarrhea, radiation-induced diarrhea, and chemotherapy-induced diarrhea.[45] Another absorbent agent used for the treatment of mild diarrhea is kaopectate.\n\nRacecadotril an antisecretory medication may be used to treat diarrhea in children and adults.[86] It has better tolerability than loperamide, as it causes less constipation and flatulence.[94]",
    'metadata': {},
@@ -32,8 +33,9 @@ DATA
        'reason': 'exploration'}],
      'model_annotations': []}
      
- # Data Preprocessing    
- #spacy training data format https://spacy.io/usage/training#training-data
+ ### Data Preprocessing
+ 
+#spacy training data format https://spacy.io/usage/training#training-data
 #['tag_name'],['start'],['end'] 
 #DATA['examples'][0]['annotations'][0]['start'] 
 len(DATA['examples'])  [31]
@@ -63,7 +65,7 @@ for i in range(0,len(DATA['examples'])):
     (148, 151, 'Pathogen')]})    
     
     
-# spacy Data format  
+### spacy Data format  
 nlp=spacy.blank('en')
 doc_bin=DocBin()
 for train_eg in tqdm(pre_data[0:26]):
@@ -84,18 +86,18 @@ doc_bin.to_disk('/content/drive/MyDrive/github_proj/TRAIN_Davy.spacy')
     
    
    
-!python -m spacy download en_core_web_lg
+*!python -m spacy download en_core_web_lg
 
 ✔ Download and installation successful
 You can now load the package via spacy.load('en_core_web_lg')
 
-!python -m spacy init fill-config /content/drive/MyDrive/github_proj/base_config.cfg /content/drive/MyDrive/github_proj/config.cfg
+*!python -m spacy init fill-config /content/drive/MyDrive/github_proj/base_config.cfg /content/drive/MyDrive/github_proj/config.cfg
 
 ✔ Auto-filled config with all values
 ✔ Saved config
 
 # Training
-!python -m spacy train /content/drive/MyDrive/github_proj/config.cfg --output  /content/drive/MyDrive/github_proj/ --paths.train /content/drive/MyDrive/github_proj/TRAIN_Davy.spacy  --paths.dev /content/drive/MyDrive/github_proj/TEST_Davy.spacy
+*!python -m spacy train /content/drive/MyDrive/github_proj/config.cfg --output  /content/drive/MyDrive/github_proj/ --paths.train /content/drive/MyDrive/github_proj/TRAIN_Davy.spacy  --paths.dev /content/drive/MyDrive/github_proj/TEST_Davy.spacy
 
 ℹ Pipeline: ['tok2vec', 'ner']
 ℹ Initial learn rate: 0.001
